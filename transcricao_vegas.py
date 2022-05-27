@@ -32,7 +32,7 @@ def show():
         # mostra no console o nome da faixa
         print(clipboard.paste())
         
-        arquivo_selecionado = clipboard.paste().replace("\r\n", "")
+        arquivo_selecionado = clipboard.paste().replace("\r\n", "") #remove o \r\n que fica no clipboard
         AUDIO_FILE = path.join(arquivo_selecionado+".wav") #procura o arquivo de audio
         r = sr.Recognizer() #chama a funcao de reconhecimento como 'r'
 
