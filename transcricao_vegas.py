@@ -8,31 +8,36 @@ from os import path
 import os
 import time
 
+# contador de imagens para assistente que salva as imagens
+cont_img = 33
+
 def show():
     
     # verifica se a tecla 't' foi pressionada
-    if keyboard.read_key() == "t":
+    if keyboard.read_key() == "4":
         print('opa executou')
 
         # salva a posicao que o mouse estava inicialmente
-        atual = pyautogui.position()
+        # atual = pyautogui.position()
 
         # clica no valor da track atual
-        pyautogui.click(875,136)
+        pyautogui.press('f2')
 
         # aguarda ate o mouse se movimentar para o local
-        time.sleep(0.3)
+        time.sleep(0.5)
 
         # copia o valor que indica a track atual
         pyautogui.hotkey('ctrl', 'c')
 
+        pyautogui.press('esc')
+
         # move o mouse de volta pra posicao inicial
-        pyautogui.moveTo(atual)
+        # pyautogui.moveTo(atual)
 
         # mostra no console o nome da faixa
         print(clipboard.paste())
         
-        arquivo_selecionado = clipboard.paste().replace("\r\n", "") #remove o \r\n que fica no clipboard
+        arquivo_selecionado = clipboard.paste().replace("\r\n", "")
         AUDIO_FILE = path.join(arquivo_selecionado+".wav") #procura o arquivo de audio
         r = sr.Recognizer() #chama a funcao de reconhecimento como 'r'
 
@@ -48,6 +53,24 @@ def show():
         except sr.RequestError as e:
             print("Não foi possível solicitar do google a transcrição {0}".format(e))
 
+    if keyboard.read_key() == "5":
+        global cont_img
+        pyautogui.click(button='right')
+        time.sleep(0.1)
+        pyautogui.press('i')
+        pyautogui.press('s')
+        time.sleep(1)
+        pyautogui.write('a'+str(cont_img))
+        pyautogui.press('enter')
+        pyautogui.click(1240,709)
+        time.sleep(0.3)
+        pyautogui.press('f5')
+        time.sleep(1)
+        pyautogui.moveTo(1184,724)
+        pyautogui.dragTo(595, 605, 1, button='left')
+        
+        cont_img+=1
+        
         # reseta o show()
     if keyboard != "":
         time.sleep(0.1) # aguarda um tempo para o reset
